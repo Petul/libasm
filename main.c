@@ -3,15 +3,44 @@
 #include <string.h>
 
 size_t	ft_strlen(char *str);
+char	*ft_strcpy(char *dst, char *src);
 
-int main(int argc, char **argv)
+void test_ft_strlen(void)
 {
-	if (argc != 2)
-		return (0);
-	
-	printf("Test ft_strlen\n");
-	printf("%s: (%zu)\n", argv[1], ft_strlen(argv[1]));
-	printf("%s: (%zu)\n", argv[1], strlen(argv[1]));
-	
+	char *str = "Hello";
+
+	printf("Testing ft_strlen\n");
+
+	printf("ft_strlen(%s)\n", str);
+	printf("%s: (%zu)\n", str, ft_strlen(str));
+
+	printf("strlen(%s)\n", str);
+	printf("%s: (%zu)\n", str, strlen(str));
+}
+
+void test_ft_strcpy(void)
+{
+
+	char dst[6];
+
+	printf("Test ft_strcpy\n");
+
+	printf("ft_strcpy\n");
+	memset(dst, 0, 6);
+	ft_strcpy(dst, "Hello");
+	printf("dst contains: %s\n", dst);
+
+	memset(dst, 0, 6);
+	printf("strcpy\n");
+	strcpy(dst, "Hello");
+	printf("dst contains: %s\n", dst);
+
+}
+
+int main(void)
+{
+	test_ft_strlen();
+	test_ft_strcpy();
+
 	return (0);
 }
