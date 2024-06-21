@@ -17,20 +17,20 @@ section .text
 ; input	rsi as pointer to src string
 ; output rax as pointer to dst string
 ft_strcpy:
-	mov rcx, rdi ; save original dst pointer
-	mov bl, [rsi] ; copy character from src string to bl
-	cmp bl, 0 ; check if null in bl
+	push rdi ; save original rdi on stack
+	cmp word [rsi], 0 ; check if null in bl
 	je _null_exit
 _copy_loop:
-	mov [rdi], bl
+	mov al, [rsi]
+	mov [rdi], al
 	inc rdi ; increment dst pointer
 	inc rsi ; increment src pointer
-	mov bl, [rsi] ; copy character from src string to bl
-	cmp bl, 0 ; check if null in bl
+	cmp byte [rsi], 0 ; check if null in bl
 	jne _copy_loop
 _null_exit:
-	mov rdi, 0 ; null terminate string
-	mov rax, rcx
+	mov byte [rdi], 0 ; null terminate string
+	pop rdi ; pop original dst from stack
+	mov rax, rdi
 	ret
 
 
