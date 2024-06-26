@@ -29,7 +29,7 @@ _cmp:
 	mov cl, [rdi] ; move s1 character to cl
 	mov dl, [rsi] ; move s2 character to dl
 	mov r8b, cl
-	and r8b, dl ; check if both characters are null
+	or r8b, dl ; check if both characters are null
 	jz _ret_diff ; return 0 if both are null
 	cmp cl, dl ; compare characters
 	jz _cmp_loop ; if the characters are equal, continue
