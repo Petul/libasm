@@ -1,6 +1,6 @@
 NAME := libasm.a
 
-SFILES := ft_strlen.s ft_strcpy.s ft_strcmp.s
+SFILES := ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s
 OFILES := $(SFILES:.s=.o)
 NASM := nasm -f elf64
 

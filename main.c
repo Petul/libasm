@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/errno.h>
 
 size_t	ft_strlen(char *str);
 char	*ft_strcpy(char *dst, char *src);
 int		ft_strcmp(char *s1, char *s2);
+ssize_t	ft_write(int fd, const void *buf, size_t count);
 
 void test_ft_strlen(void)
 {
@@ -41,7 +44,7 @@ void test_ft_strcpy(void)
 void test_ft_strcmp(void)
 {
 	char str1[] = "aaa";
-	char str2[] = "aac";
+	char str2[] = "aaaa";
 
 	printf("strcmp: %d\n", strcmp(str1, str2));
 	printf("ft_strcmp: %d\n", ft_strcmp(str1, str2));
@@ -66,11 +69,28 @@ void test_ft_strcmp(void)
 	printf("ft_strcmp: %d\n", ft_strcmp("a", ""));
 }
 
+void test_ft_write(void)
+{
+	printf("Return for ft_write: %zi\n", ft_write(1, "Hello World\n", 12));
+	printf("Return for write: %zi\n", write(1, "Hello World\n", 12));
+
+	ssize_t ret;
+	int ecode;
+	ret = ft_write(32, "Hello World\n", 12);
+	ecode = errno;
+	printf("ft_write ret: %zi, errno: %d\n", ret, ecode);
+
+	ret = write(32, "Hello World\n", 12);
+	ecode = errno;
+	printf("write ret: %zi, errno: %d\n", ret, ecode);
+
+}
 int main(void)
 {
 	test_ft_strlen();
 	test_ft_strcpy();
 	test_ft_strcmp();
+	test_ft_write();
 
 	return (0);
 }
