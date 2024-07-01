@@ -8,6 +8,7 @@ size_t	ft_strlen(char *str);
 char	*ft_strcpy(char *dst, char *src);
 int		ft_strcmp(char *s1, char *s2);
 ssize_t	ft_write(int fd, const void *buf, size_t count);
+ssize_t	ft_read(int fd, const void *buf, size_t count);
 
 void test_ft_strlen(void)
 {
@@ -85,12 +86,22 @@ void test_ft_write(void)
 	printf("write ret: %zi, errno: %d\n", ret, ecode);
 
 }
+
+void test_ft_read(void)
+{
+	char buf[10];
+
+	read(0, buf, 10);
+	printf("Read: %s\n", buf);
+}
+
 int main(void)
 {
 	test_ft_strlen();
 	test_ft_strcpy();
 	test_ft_strcmp();
 	test_ft_write();
+	test_ft_read();
 
 	return (0);
 }
