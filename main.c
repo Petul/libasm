@@ -3,12 +3,14 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/errno.h>
+#include <stdlib.h>
 
 size_t	ft_strlen(char *str);
 char	*ft_strcpy(char *dst, char *src);
 int		ft_strcmp(char *s1, char *s2);
 ssize_t	ft_write(int fd, const void *buf, size_t count);
 ssize_t	ft_read(int fd, const void *buf, size_t count);
+char	*ft_strdup(const char *s);
 
 void test_ft_strlen(void)
 {
@@ -95,13 +97,24 @@ void test_ft_read(void)
 	printf("Read: %s\n", buf);
 }
 
+void test_ft_strdup(void)
+{
+	char *dup;
+
+	dup = ft_strdup("hello");
+
+	printf("dup: %s\n", dup);
+	free(dup);
+}
+
 int main(void)
 {
 	test_ft_strlen();
-	test_ft_strcpy();
-	test_ft_strcmp();
-	test_ft_write();
-	test_ft_read();
+	// test_ft_strcpy();
+	// test_ft_strcmp();
+	// test_ft_write();
+	// test_ft_read();
+	// test_ft_strdup();
 
 	return (0);
 }

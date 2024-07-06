@@ -1,8 +1,8 @@
 NAME := libasm.a
 
-SFILES := ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s
+SFILES := ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s
 OFILES := $(SFILES:.s=.o)
-NASM := nasm -f elf64
+NASM := nasm -f elf64 -g -F dwarf
 
 .PHONY: all
 all: $(NAME)
