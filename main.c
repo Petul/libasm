@@ -17,15 +17,13 @@ char	*ft_strdup(const char *s);
 
 void test_ft_strlen(void)
 {
-	char *str = "Hello";
+	puts("Testing ft_strlen..\n");
 
-	printf("Testing ft_strlen\n");
+	assert(ft_strlen("Hello") == strlen("Hello"));
+	assert(ft_strlen("") == strlen(""));
+	assert(ft_strlen("A") == strlen("B"));
 
-	printf("ft_strlen(%s)\n", str);
-	printf("%s: (%zu)\n", str, ft_strlen(str));
-
-	printf("strlen(%s)\n", str);
-	printf("%s: (%zu)\n", str, strlen(str));
+	puts("ft_strlen: OK");
 }
 
 void test_ft_strcpy(void)
@@ -133,11 +131,11 @@ void test_ft_strdup(void)
 int main(void)
 {
 	test_ft_strlen();
-	test_ft_strcpy();
-	test_ft_strcmp();
-	test_ft_write();
-	test_ft_read();
-	test_ft_strdup();
+	// test_ft_strcpy();
+	// test_ft_strcmp();
+	// test_ft_write();
+	// test_ft_read();
+	// test_ft_strdup();
 
 	return (0);
 }

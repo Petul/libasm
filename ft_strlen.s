@@ -17,10 +17,11 @@ section	.text
 ft_strlen:
 	mov rax, 0 ; store length counter in rbx
 _count_loop:
-	inc rax ; increment counter
-	inc rdi ; increment C string pointer
 	mov cl, [rdi] ; copy value of rdi to cl (to get char size)
 	cmp cl, 0 ; check if null
-	jne _count_loop
-
+	je _ret ; jmp to end if null
+	inc rax ; increment counter
+	inc rdi ; increment C string pointer
+	jmp _count_loop
+_ret:
 	ret
