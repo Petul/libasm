@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
+#include <strings.h>
 #include <unistd.h>
 #include <sys/errno.h>
 #include <stdlib.h>
+#include <fcntl.h>
+#include <assert.h>
 
 size_t	ft_strlen(char *str);
 char	*ft_strcpy(char *dst, char *src);
@@ -91,10 +94,30 @@ void test_ft_write(void)
 
 void test_ft_read(void)
 {
-	char buf[10];
+	puts("Testing ft_read..");
+	char *str = "Hello Read!\n";
+	char *buf = calloc(sizeof(char), strlen(str) + 1);
+	char *buf2 = calloc(sizeof(char), strlen(str) + 1);
+	int fd = open("read_test", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	write(fd, str, strlen(str));
+	close(fd);
+	fd = open("read_test",  O_RDONLY);
+	ssize_t r_ft = ft_read(fd, buf, strlen(str));
+	close(fd);
 
-	read(0, buf, 10);
-	printf("Read: %s\n", buf);
+	fd = open("read_test",  O_RDONLY);
+	ssize_t r_c = read(fd, buf2, strlen(str));
+	close(fd);
+
+	assert(r_ft > 0);
+	assert(r_ft == r_c);
+	assert(strcmp(buf, buf2) == 0);
+
+	free(buf);
+	free(buf2);
+
+	puts("ft_read: OK");
+
 }
 
 void test_ft_strdup(void)

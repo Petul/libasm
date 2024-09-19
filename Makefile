@@ -18,7 +18,7 @@ $(NAME): $(OFILES)
 %.o: %.s
 	$(NASM) $< -o $@
 
-$(PROG): $(NAME)
+$(PROG): $(NAME) $(CFILES)
 	$(CC) $(CFILES) $(NAME) $(CFLAGS) -o $(PROG)
 
 .PHONY: clean
