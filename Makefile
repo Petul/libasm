@@ -4,6 +4,11 @@ SFILES := ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s
 OFILES := $(SFILES:.s=.o)
 NASM := nasm -f elf64 -g -F dwarf
 
+CFILES := main.c
+CFLAGS := -Wall -Wextra -Werror --static
+CC := clang
+PROG := prog
+
 .PHONY: all
 all: $(NAME)
 
@@ -13,6 +18,9 @@ $(NAME): $(OFILES)
 %.o: %.s
 	$(NASM) $< -o $@
 
+$(PROG): $(NAME)
+	$(CC) $(CFILES) $(NAME) $(CFLAGS) -o $(PROG)
+
 .PHONY: clean
 clean:
 	rm -f $(OFILES)
@@ -20,6 +28,7 @@ clean:
 .PHONY: fclean
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(PROG)
 
 .PHONY: re
 re: fclean all
