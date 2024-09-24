@@ -14,6 +14,7 @@ int		ft_strcmp(char *s1, char *s2);
 ssize_t	ft_write(int fd, const void *buf, size_t count);
 ssize_t	ft_read(int fd, const void *buf, size_t count);
 char	*ft_strdup(const char *s);
+int		ft_atoi_base(char *str, char *base);
 
 void test_ft_strlen(void)
 {
@@ -123,19 +124,31 @@ void test_ft_strdup(void)
 	char *dup;
 
 	dup = ft_strdup("hello");
+	// if (!dup)
+	// 	printf("Strdup returned null\n");
+	// else
+	// {
+	// 	printf("dup: %s\n", dup);
+	// 	free(dup);
+	// }
+}
 
-	printf("dup: %s\n", dup);
-	free(dup);
+void test_ft_atoi_base(void)
+{
+	
+	printf("%d\n", ft_atoi_base("12", "123456789"));
+	printf("%d\n", ft_atoi_base("12", "1"));
 }
 
 int main(void)
 {
-	test_ft_strlen();
+	// test_ft_strlen();
 	// test_ft_strcpy();
 	// test_ft_strcmp();
 	// test_ft_write();
 	// test_ft_read();
 	// test_ft_strdup();
+	test_ft_atoi_base();
 
 	return (0);
 }

@@ -1,11 +1,12 @@
 NAME := libasm.a
 
-SFILES := ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s
+SFILES := ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s ft_atoi_base.s
 OFILES := $(SFILES:.s=.o)
 NASM := nasm -f elf64 -g -F dwarf
 
 CFILES := main.c
-CFLAGS := -Wall -Wextra -Werror --static
+CFLAGS := -Wall -Wextra --static -g
+# CFLAGS := -Wall -Wextra -Werror --static
 CC := clang
 PROG := prog
 
