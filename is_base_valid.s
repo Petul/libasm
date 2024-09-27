@@ -6,7 +6,7 @@
 ;    By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2024/09/27 15:10:55 by pleander          #+#    #+#              ;
-;    Updated: 2024/09/27 15:17:09 by pleander         ###   ########.fr        ;
+;    Updated: 2024/09/27 15:19:41 by pleander         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -46,7 +46,7 @@ _check_one_character:
 
 _check_next_character:
 	inc rsi ; increment rsi for next iteration
-	cmp BYTE [rsi], 0 ;check if we reached the end of the base string
+	cmp BYTE [rsi], 0 ; check if we reached the end of the base string
 	je _base_return
 	character_is_valid BYTE [rsi]
 	mov rdi, rsi
