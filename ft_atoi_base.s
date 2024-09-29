@@ -20,6 +20,7 @@ section .text
 	push rax
 	push rdi
 	push rsi
+	push rdx
 	mov rdi, %1
 	push rdi
 	call ft_strlen
@@ -35,6 +36,7 @@ section .text
 	pop rsi
 	pop rdi
 	pop rax
+	pop rdx
 %endmacro
 	
 ; input rdi as pointer to string
@@ -42,14 +44,84 @@ section .text
 ; output rax as integer
 ; int ft_atoi_base(char *str, char *base);
 ft_atoi_base:
-	write_string rdi
+	;write_string rsi
 	push rdi
 	push rsi
 	mov rdi, rsi;
+	call ft_strlen ; store base len in rdx
+	mov rdx, rax
 	call is_base_valid
 	pop rsi
 	pop rdi
 	call _skip_spaces
+	call _get_sign
+
+_calc_value:
+	mov r9, 0 ; store sum in r9
+_calc_loop:
+	cmp BYTE [rdi], 0
+	je _end_calc
+	call _get_index_in_base
+	cmp rax, 0
+	jl _calc_error
+	call _do_calculation
+	inc rdi
+	jmp _calc_loop
+_do_calculation:
+	mov r10, rax ; base index
+	push rdx
+	push rcx
+	mov rcx, rdx
+	mov rax, r9
+	mul rdx
+	mov r9, rax
+	mov rax, r8
+	mul r10
+	add r9, rax
+	pop rcx
+	pop rdx
+	ret
+_end_calc:
+	mov rax, r9
+	ret
+_calc_error:
+	mov rax, -1;
+	ret
+
+; returns index in base on rax or -1 if not found
+_get_index_in_base:
+	push rdi ; save original values
+	push rsi
+	mov rcx, 0
+_get_index_loop: ; TODO: Check get index in base
+	mov al, [rsi]
+	cmp al, [rdi]
+	je _return_index
+	cmp BYTE [rsi], 0 ; Reached end of base and did not find character
+	je _return_error
+	inc rsi
+	inc rcx
+	jmp _get_index_loop
+_return_error:
+	mov rax, -1
+	pop rsi
+	pop rdi
+	ret
+_return_index:
+	mov rax, rcx
+	pop rsi
+	pop rdi
+	ret
+
+_get_sign:
+	cmp BYTE [rdi], 45 ; Check if first character is '-'
+	je _negative_sign
+_positive_sign:
+	mov r8, 1
+	ret
+_negative_sign:
+	mov r8, -1
+	inc rdi ; Skip first character if it's '-'
 	ret
 
 _skip_spaces:
