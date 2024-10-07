@@ -33,14 +33,14 @@ section .text
 	mov rsi, nl
 	mov rdi, 1
 	call ft_write
+	pop rdx
 	pop rsi
 	pop rdi
 	pop rax
-	pop rdx
 %endmacro
 	
-; input rdi as pointer to string
-; input rsi as pointer to base
+; input rdi as pointer to number string
+; input rsi as pointer to base string
 ; output rax as integer
 ; int ft_atoi_base(char *str, char *base);
 ft_atoi_base:
@@ -59,25 +59,24 @@ ft_atoi_base:
 _calc_value:
 	mov r9, 0 ; store sum in r9
 _calc_loop:
-	cmp BYTE [rdi], 0
+	cmp BYTE [rdi], 0 ; if reached null byte then end
 	je _end_calc
-	call _get_index_in_base
+	call _get_index_in_base ; find index of numbe rin base
 	cmp rax, 0
-	jl _calc_error
+	jl _calc_error ; did not find index in base
 	call _do_calculation
-	inc rdi
+	inc rdi ; go the next character in number string
 	jmp _calc_loop
 _do_calculation:
-	mov r10, rax ; base index
+	mov r10, rax ; store base index in r10
 	push rdx
 	push rcx
-	mov rcx, rdx
-	mov rax, r9
-	mul rdx
-	mov r9, rax
-	mov rax, r8
-	mul r10
-	add r9, rax
+	mov rax, r9 ; move sum into rax
+	mul rdx ; res * ft_strlen(base)
+	mov r9, rax ; r9 = res * ft_strlen(base)
+	mov rax, r8 ; sign stored in r8
+	mul r10 ; rax = sign * base_index
+	add r9, rax ; r9 = r9 + rax
 	pop rcx
 	pop rdx
 	ret
@@ -109,6 +108,7 @@ _return_error:
 	ret
 _return_index:
 	mov rax, rcx
+	inc rax; we should actually get position in base not index?
 	pop rsi
 	pop rdi
 	ret
