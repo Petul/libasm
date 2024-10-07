@@ -132,29 +132,22 @@ void test_ft_strdup(void)
 	// }
 }
 
+#define TEST_FT_ATOI_BASE(num, base, res) { \
+	printf("\tChecking ft_atoi_base(%s, %s) == %d\t", num, base ,res); \
+	ft_atoi_base(num, base) == res ? printf("OK\n") : printf("ERROR\n"); \
+}
+
 void test_ft_atoi_base(void)
 {
-	
-	ft_atoi_base("12", "123456789");
-	ft_atoi_base("12", "123");
-	ft_atoi_base("12", "12");
-	ft_atoi_base("12", "");
-	ft_atoi_base("12", "1");
-	ft_atoi_base("12", "1233");
-	ft_atoi_base("12", "11111111");
-	ft_atoi_base("22", "-123");
-	ft_atoi_base("12", "+123");
-	ft_atoi_base("12", "123 ");
-	// printf("%d\n", ft_atoi_base("12", "123456789"));
-	// printf("%d\n", ft_atoi_base("12", "123"));
-	// printf("%d\n", ft_atoi_base("12", "12"));
-	// printf("%d\n", ft_atoi_base("12", ""));
-	// printf("%d\n", ft_atoi_base("12", "1"));
-	// printf("%d\n", ft_atoi_base("12", "1233"));
-	// printf("%d\n", ft_atoi_base("12", "11111111"));
-	// printf("%d\n", ft_atoi_base("12", "-123"));
-	// printf("%d\n", ft_atoi_base("12", "+123"));
-	// printf("%d\n", ft_atoi_base("12", "123 "));
+	puts("Testing ft_atoi_base..");
+
+	TEST_FT_ATOI_BASE("0", "0123456789", 0);
+	TEST_FT_ATOI_BASE("-42", "0123456789", -42);
+	TEST_FT_ATOI_BASE("42", "0123456789", 42);
+	TEST_FT_ATOI_BASE("101010", "01", 42);
+	TEST_FT_ATOI_BASE("-2a", "0123456789abcdef", -42);
+
+	puts("ft_atoi_base: OK");
 }
 
 int main(void)
