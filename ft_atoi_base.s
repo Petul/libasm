@@ -108,7 +108,6 @@ _return_error:
 	ret
 _return_index:
 	mov rax, rcx
-	inc rax; we should actually get position in base not index?
 	pop rsi
 	pop rdi
 	ret
