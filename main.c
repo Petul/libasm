@@ -14,6 +14,10 @@ int		ft_strcmp(char *s1, char *s2);
 ssize_t	ft_write(int fd, const void *buf, size_t count);
 ssize_t	ft_read(int fd, const void *buf, size_t count);
 char	*ft_strdup(const char *s);
+int		ft_atoi_base(char *str, char *base);
+
+#define PRINT_OK "\x1B[32mOK\n\x1B[m"
+#define PRINT_ERR "\x1B[31mERROR\n\x1B[m"
 
 void test_ft_strlen(void)
 {
@@ -115,7 +119,6 @@ void test_ft_read(void)
 	free(buf2);
 
 	puts("ft_read: OK");
-
 }
 
 void test_ft_strdup(void)
@@ -123,19 +126,43 @@ void test_ft_strdup(void)
 	char *dup;
 
 	dup = ft_strdup("hello");
+	// if (!dup)
+	// 	printf("Strdup returned null\n");
+	// else
+	// {
+	// 	printf("dup: %s\n", dup);
+	// 	free(dup);
+	// }
+}
 
-	printf("dup: %s\n", dup);
-	free(dup);
+#define TEST_FT_ATOI_BASE(num, base, res) { \
+	printf(" Checking ft_atoi_base( %10s, %20s ) == %5d ", num, base ,res); \
+	ft_atoi_base(num, base) == res ? printf(PRINT_OK) : printf(PRINT_ERR); \
+}
+
+void test_ft_atoi_base(void)
+{
+	puts("Testing ft_atoi_base..");
+
+	TEST_FT_ATOI_BASE("0", "0123456789", 0);
+	TEST_FT_ATOI_BASE("-42", "0123456789", -42);
+	TEST_FT_ATOI_BASE("42", "0123456789", 42);
+	TEST_FT_ATOI_BASE("101010", "01", 42);
+	TEST_FT_ATOI_BASE("-2a", "0123456789abcdef", -42);
+	TEST_FT_ATOI_BASE("0", "0", -1); //invalid base
+	TEST_FT_ATOI_BASE("12", "01231456", -1); //invalid base
+	TEST_FT_ATOI_BASE("ff", "0123456789abcdef", 255);
 }
 
 int main(void)
 {
 	test_ft_strlen();
-	// test_ft_strcpy();
-	// test_ft_strcmp();
-	// test_ft_write();
-	// test_ft_read();
-	// test_ft_strdup();
+	test_ft_strcpy();
+	test_ft_strcmp();
+	test_ft_write();
+	test_ft_read();
+	//test_ft_strdup();
+	test_ft_atoi_base();
 
 	return (0);
 }
