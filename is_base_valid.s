@@ -31,7 +31,7 @@ is_base_valid:
 	cmp rax, 2 ; check if base is less than 2
 	jl _base_invalid
 	mov rax, 1 ; set valid flag
-	mov rdi, rsi ; not necessary?
+	mov rsi, rdi ; not necessary?
 	character_is_valid BYTE [rsi]
 
 _check_one_character:
@@ -54,6 +54,8 @@ _check_next_character:
 
 _base_invalid:
 	mov rax, 0 ; set invalid flag
+	ret
 
 _base_return:
+	mov rax, 1
 	ret

@@ -53,6 +53,8 @@ ft_atoi_base:
 	call is_base_valid
 	pop rsi
 	pop rdi
+	;cmp rax, 0
+	;je _calc_error
 	call _skip_spaces
 	call _get_sign
 
