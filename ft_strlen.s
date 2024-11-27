@@ -15,6 +15,7 @@ section	.text
 ;input rdi as pointer to string
 ;output rax as 64 bit integer
 ft_strlen:
+	push rdi ; save original value of rdi
 	mov rax, 0 ; store length counter in rbx
 _count_loop:
 	mov cl, [rdi] ; copy value of rdi to cl (to get char size)
@@ -24,4 +25,5 @@ _count_loop:
 	inc rdi ; increment C string pointer
 	jmp _count_loop
 _ret:
+	pop rdi ; restore original value of rdi
 	ret

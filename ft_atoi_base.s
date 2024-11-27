@@ -44,17 +44,24 @@ section .text
 ; output rax as integer
 ; int ft_atoi_base(char *str, char *base);
 ft_atoi_base:
-	;write_string rsi
+	;write_string rdi
 	push rdi
 	push rsi
 	mov rdi, rsi;
-	call ft_strlen ; store base len in rdx
-	mov rdx, rax
 	call is_base_valid
 	pop rsi
 	pop rdi
-	;cmp rax, 0
-	;je _calc_error
+	cmp rax, 0
+	je _calc_error
+
+	push rdi
+	push rsi
+	mov rdi, rsi
+	call ft_strlen ; store base len in rdx
+	mov rdx, rax
+	pop rsi
+	pop rdi
+
 	call _skip_spaces
 	call _get_sign
 
