@@ -5,7 +5,7 @@ OFILES := $(SFILES:.s=.o)
 NASM := nasm -f elf64 -g -F dwarf
 
 CFILES := main.c
-CFLAGS := -Wall -Wextra --static -g 
+CFLAGS := -Wall -Wextra --static -g # --static flag causes valgrind errors
 # CFLAGS := -Wall -Wextra -Werror --static
 CC := gcc #clang?
 PROG := prog 
