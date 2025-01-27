@@ -20,14 +20,21 @@ section .text
 ; input rdi as pointer to string to be duplicated
 ; output rax pointer to duplicated string or NULL if failed
 ft_strdup:
-	push rdi ; save str on the stack as strlen changes rdi
-	call ft_strlen ; calc len of rdi
-	add rax, 1 ; add for trailing zero
-	mov rdi, rax ; copy malloc argument to input register
-	call malloc
-	mov rdi, rax ; copy address of heap allocated memory to rdi
-	pop rsi ; put input string in rsi
-	call ft_strcpy ; copy string from rsi to rdi
-	mov rax, rdi ; mov destination addr to return register
+	push rdi		; save str on the stack as strlen changes rdi
+	call ft_strlen	; calc len of rdi
+	add rax, 1		; add for trailing zero
+	mov rdi, rax	; copy malloc argument to input register
+	call malloc;
+	test rax, rax;	; malloc null check
+	jz _error		; if rax is 0 error out
+	mov rdi, rax	; copy address of heap allocated memory to rdi
+	pop rsi			; put input string in rsi
+	call ft_strcpy	; copy string from rsi to rdi
+	mov rax, rdi	; mov destination addr to return register
 	ret
+
+ _error:
+ 	mov rax, 0
+	pop rdi			; pop rdi from stack also on error
+ 	ret
 	

@@ -123,16 +123,56 @@ void test_ft_read(void)
 
 void test_ft_strdup(void)
 {
-	char *dup;
 
-	dup = ft_strdup("hello");
-	// if (!dup)
-	// 	printf("Strdup returned null\n");
-	// else
-	// {
-	// 	printf("dup: %s\n", dup);
-	// 	free(dup);
-	// }
+	{
+		printf("Testing ft_strdup(\"hello\")\n");
+		char *dup;
+		dup = ft_strdup("hello");
+		if (!dup)
+			printf("ft_strdup returned null\n");
+		else
+		{
+			printf("ft_strdup: %s\n", dup);
+			free(dup);
+		}
+	}
+	{
+		printf("Testing strdup(\"hello\")\n");
+		char *dup;
+		dup = strdup("hello");
+		if (!dup)
+			printf("strdup returned null\n");
+		else
+		{
+			printf("strdup: %s\n", dup);
+			free(dup);
+		}
+	}
+	{
+		printf("Testing ft_strdup(\"\")\n");
+		char *dup;
+		dup = ft_strdup("");
+		if (!dup)
+			printf("ft_strdup returned null\n");
+		else
+		{
+			printf("ft_strdup: %s\n", dup);
+			free(dup);
+		}
+	}
+	{
+		printf("Testing strdup(\"\")\n");
+		char *dup;
+		dup = strdup("");
+		if (!dup)
+			printf("strdup returned null\n");
+		else
+		{
+			printf("strdup: %s\n", dup);
+			free(dup);
+		}
+	}
+
 }
 
 #define TEST_FT_ATOI_BASE(num, base, res) { \
@@ -156,13 +196,13 @@ void test_ft_atoi_base(void)
 
 int main(void)
 {
-	test_ft_strlen();
-	test_ft_strcpy();
-	test_ft_strcmp();
-	test_ft_write();
-	test_ft_read();
-	//test_ft_strdup();
-	test_ft_atoi_base();
+	//test_ft_strlen();
+	// test_ft_strcpy();
+	// test_ft_strcmp();
+	// test_ft_write();
+	// test_ft_read();
+	test_ft_strdup();
+//	test_ft_atoi_base();
 
 	return (0);
 }
