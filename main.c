@@ -123,6 +123,7 @@ void test_ft_read(void)
 
 void test_ft_strdup(void)
 {
+	puts("Testing ft_strdup");
 
 	{
 		printf("Testing ft_strdup(\"hello\")\n");
@@ -196,13 +197,13 @@ void test_ft_atoi_base(void)
 
 int main(void)
 {
-	//test_ft_strlen();
-	// test_ft_strcpy();
-	// test_ft_strcmp();
-	// test_ft_write();
-	// test_ft_read();
+	test_ft_strlen();
+	test_ft_strcpy();
+	test_ft_strcmp();
+	test_ft_write();
+	test_ft_read();
 	test_ft_strdup();
-//	test_ft_atoi_base();
+	test_ft_atoi_base();
 
 	return (0);
 }
