@@ -236,6 +236,14 @@ void test_ft_list_push_front(void)
 		puts("List after push_front");
 		print_list(start);
 	}
+
+	{
+		puts("");
+		puts("Testing empty start:");
+		t_list **start = NULL;
+		ft_list_push_front(start, "foo");
+		puts("Did not crash..");
+	}
 }
 void test_lists(void)
 {
