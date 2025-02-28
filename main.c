@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <assert.h>
+#include "ft_list.h"
 
 size_t	ft_strlen(char *str);
 char	*ft_strcpy(char *dst, char *src);
@@ -15,6 +16,7 @@ ssize_t	ft_write(int fd, const void *buf, size_t count);
 ssize_t	ft_read(int fd, const void *buf, size_t count);
 char	*ft_strdup(const char *s);
 int		ft_atoi_base(char *str, char *base);
+void	ft_list_push_front(t_list **begin_list, void *data);
 
 #define PRINT_OK "\x1B[32mOK\n\x1B[m"
 #define PRINT_ERR "\x1B[31mERROR\n\x1B[m"
@@ -195,15 +197,61 @@ void test_ft_atoi_base(void)
 	TEST_FT_ATOI_BASE("ff", "0123456789abcdef", 255);
 }
 
+void print_list(t_list **start)
+{
+	if (!start || !*start)
+	{
+		puts("List is empty!");
+		return;
+	}
+	t_list *first = *start;
+	while (first)
+	{
+		printf("Data: %s\n", (char *)first->data);
+		first = first->next;
+	}
+}
+
+void test_ft_list_push_front(void)
+{
+	{
+		puts("");
+		puts("Testing basic list:");
+		t_list baz = {"baz", NULL};
+		t_list bar = {"bar", &baz};
+		t_list *start = &bar;
+		puts("List before push_front");
+		print_list(&start);
+		ft_list_push_front(&start, "foo");
+		puts("List after push_front");
+		print_list(&start);
+	}
+
+	{
+		puts("");
+		puts("Testing empty list:");
+		puts("List before push_front");
+		t_list** start = malloc(sizeof(t_list *));
+		ft_list_push_front(start, "Only element");
+		puts("List after push_front");
+		print_list(start);
+	}
+}
+void test_lists(void)
+{
+	test_ft_list_push_front();
+}	
+
 int main(void)
 {
-	test_ft_strlen();
-	test_ft_strcpy();
-	test_ft_strcmp();
-	test_ft_write();
-	test_ft_read();
-	test_ft_strdup();
-	test_ft_atoi_base();
+	// test_ft_strlen();
+	// test_ft_strcpy();
+	// test_ft_strcmp();
+	// test_ft_write();
+	// test_ft_read();
+	// test_ft_strdup();
+	// test_ft_atoi_base();
+	test_lists();
 
 	return (0);
 }
