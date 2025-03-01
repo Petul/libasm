@@ -6,7 +6,7 @@
 ;    By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2025/02/19 19:08:29 by pleander          #+#    #+#              ;
-;    Updated: 2025/02/19 21:03:10 by pleander         ###   ########.fr        ;
+;    Updated: 2025/03/01 20:34:51 by pleander         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -14,7 +14,7 @@ section .text
 	global ft_list_push_front
 	extern malloc
 
-;input rdi as pointer to pointer to t_list
+;input rdi as t_list**
 ;input rsi pointer to data of new list
 
 ft_list_push_front:

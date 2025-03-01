@@ -1,6 +1,6 @@
 NAME := libasm.a
 
-SFILES := ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s ft_atoi_base.s is_base_valid.s ft_list_push_front.s
+SFILES := ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s ft_atoi_base.s is_base_valid.s ft_list_push_front.s ft_list_size.s
 OFILES := $(SFILES:.s=.o)
 NASM := nasm -f elf64 -g -F dwarf
 

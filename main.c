@@ -17,6 +17,7 @@ ssize_t	ft_read(int fd, const void *buf, size_t count);
 char	*ft_strdup(const char *s);
 int		ft_atoi_base(char *str, char *base);
 void	ft_list_push_front(t_list **begin_list, void *data);
+int		ft_list_size(t_list *begin_list);
 
 #define PRINT_OK "\x1B[32mOK\n\x1B[m"
 #define PRINT_ERR "\x1B[31mERROR\n\x1B[m"
@@ -245,9 +246,40 @@ void test_ft_list_push_front(void)
 		puts("Did not crash..");
 	}
 }
+
+void test_ft_list_size(void)
+{
+	{
+
+		puts("Testing ft_list_size:");
+		puts("");
+		puts("Testing normal case:");
+		t_list **s = malloc(sizeof(t_list *));
+		ft_list_push_front(s, "foo");
+		ft_list_push_front(s, "bar");
+		ft_list_push_front(s, "baz");
+		ft_list_push_front(s, "hello");
+		ft_list_push_front(s, "world");
+		int n = ft_list_size(*s);
+		printf("List size is %d\n", n);
+		assert(n == 5);
+	}
+
+	{
+		puts("Testing empty list:");
+		t_list **s = malloc(sizeof(t_list *));
+		*s = NULL;
+		int n = ft_list_size(*s);
+		printf("List size is %d\n", n);
+		assert(n == 0);
+	}
+}
+
 void test_lists(void)
 {
 	test_ft_list_push_front();
+	test_ft_list_size();
+
 }	
 
 int main(void)
