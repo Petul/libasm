@@ -18,6 +18,7 @@ char	*ft_strdup(const char *s);
 int		ft_atoi_base(char *str, char *base);
 void	ft_list_push_front(t_list **begin_list, void *data);
 int		ft_list_size(t_list *begin_list);
+void	ft_list_sort(t_list **begin_list, int (*cmp)());
 
 #define PRINT_OK "\x1B[32mOK\n\x1B[m"
 #define PRINT_ERR "\x1B[31mERROR\n\x1B[m"
@@ -275,10 +276,24 @@ void test_ft_list_size(void)
 	}
 }
 
+void test_ft_list_sort(void)
+{
+		puts("Testing ft_list_sort:");
+		puts("");
+		puts("Testing sorted list:");
+		t_list **s = malloc(sizeof(t_list *));
+		ft_list_push_front(s, "foo");
+		ft_list_push_front(s, "baz");
+		ft_list_push_front(s, "bar");
+		ft_list_push_front(s, "ar");
+		ft_list_sort(s, &strcmp);
+}
+
 void test_lists(void)
 {
 	test_ft_list_push_front();
 	test_ft_list_size();
+	test_ft_list_sort();
 
 }	
 
